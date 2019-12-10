@@ -2,12 +2,12 @@
   <poke-info />
 </template>
 
-<script lang="ts">
-import PokeInfo from '@/components/PokeInfo.vue';
+<script lang="js">
+import PokeInfo from '@/components/organisms/PokeInfo';
 
 export default {
   name: 'Pokedex',
-  conponent: {
+  components: {
     PokeInfo
   }
 };

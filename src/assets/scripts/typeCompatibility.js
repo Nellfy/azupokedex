@@ -112,4 +112,3 @@ let main = (typeList) => {
 }
 
 module.exports = { getTypeInfo, main }
-export default { main }

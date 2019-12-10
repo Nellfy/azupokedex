@@ -1,14 +1,14 @@
 <template>
-  <div class="pokedex">
+  <div class="pokeinfo">
     <v-container justify="center" fluid>
       <v-form ref="form">
         <v-row align="center" justify="center">
           <v-col cols="8">
-            <v-text-field label="pokemon's name" v-model="name" required></v-text-field>
+            <v-text-field label="pokemon's name" v-model="pokename" :rules="rules" required></v-text-field>
           </v-col>
           <v-col cols="2" align="center">
             <v-btn fab color="success" @click="search">
-              <v-icon>search</v-icon>
+              <v-icon>mdi-magnify</v-icon>
             </v-btn>
           </v-col>
         </v-row>
@@ -53,19 +53,28 @@
           <v-simple-table>
             <template>
               <tbody>
-                <!--<td class="text-left" v-for="type in pokemon.type" :key="type.id">{{ type }}</td>-->
+                <td class="text-left" v-for="item in pokemon.type" :key="item">{{ item }}</td>
               </tbody>
             </template>
           </v-simple-table>
-          <v-simple-table>
-            <template>
-              <thead>
-                <th>×2</th>
-              </thead>
-              <tbody></tbody>
-            </template>
-          </v-simple-table>
         </v-col>
+      </v-row>
+      <v-row justify="center">
+        <v-col cols="10">
+          <span>タイプ相性</span>
+        </v-col>
+      </v-row>
+      <v-row justify="center">
+        <v-simple-table class="mx-2" v-for="damage in damagelist" :key="damage">
+          <thead>
+            <th class="text-center">{{ damage }}</th>
+          </thead>
+          <tbody>
+            <tr v-for="comp in pokemon.compatibility" :key="comp.id">
+              <td class="text-center" v-if="comp.damage === damage">{{ comp.type }}</td>
+            </tr>
+          </tbody>
+        </v-simple-table>
       </v-row>
       <v-row justify="center">
         <v-col cols="10">
@@ -86,25 +95,29 @@
   </div>
 </template>
 
-<script lang="ts">
-// import typeCompatibility from '@/assets/scripts/typeCompatibility.js'
-// import pokeData from '@/assets/scripts/galarPokemonsData.js'
+<script lang="js">
+const typeCompatibility = require('@/assets/scripts/typeCompatibility')
+const pokeData = require('@/assets/scripts/galarPokemonsData')
 
 export default {
   name: 'PokeInfo',
-  // data: {
-  //   return f
-  // },
+  data: () => ({
+    pokename: 'モスノウ',
+    pokemon: null,
+    rules: [v => !!v || '入力してください'],
+    damagelist: [4, 2, 0.5, 0]
+  }),
   methods: {
-    search: () => {
-      // if (this.$refs.form.validate()) {
-      //   let pokemon = pokemons.find(pokemon => pokemon.name === this.name)
-      //   if (pokemon) {
-      //     this.typeCompatibility = typeCompatibility.calc(pokemon.type)
-      //     console.log(JSON.stringify(this.typeCompatibility))
-      //   }
-      //   this.pokemon = pokemon
-      // }
+    search: function () {
+      console.log('invoke search')
+      if (this.$refs.form.validate()) {
+        let pokemon = pokeData.data.find(pokemon => pokemon.name === this.pokename)
+        if (pokemon) {
+          pokemon.compatibility = typeCompatibility.main(pokemon.type)
+          console.log(JSON.stringify(pokemon.compatibility))
+        }
+        this.pokemon = pokemon
+      }
     }
   }
 }
