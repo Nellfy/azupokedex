@@ -1,21 +1,18 @@
 <template>
   <v-app>
-    <v-content>
-      <Pokedex />
-    </v-content>
+    <navigation-bar></navigation-bar>
+    <router-view></router-view>
   </v-app>
 </template>
 
 <script>
-import Pokedex from './components/pages/Pokedex';
+import NavigationBar from '@/components/organisms/NavigationBar'
 
 export default {
   name: 'App',
-
   components: {
-    Pokedex,
+    NavigationBar
   },
-
   data: () => ({
     //
   }),

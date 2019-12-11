@@ -7,9 +7,19 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: 'home',
+    // component: Home
+  },
+  {
+    path: '/pokedex',
     name: 'pokedex',
     component: Pokedex
   },
+  {
+    path: '/typeCheck',
+    name: 'typeCheck',
+    // component: TypeCheck
+  }
 ]
 
 const router = new VueRouter({
