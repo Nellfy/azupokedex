@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Pokedex from '@/components/pages/Pokedex'
+import TypeChecker from '@/components/pages/TypeChecker'
 
 Vue.use(VueRouter)
 
@@ -16,9 +17,9 @@ const routes = [
     component: Pokedex
   },
   {
-    path: '/typeCheck',
-    name: 'typeCheck',
-    // component: TypeCheck
+    path: '/typeChecker',
+    name: 'typeChecker',
+    component: TypeChecker
   }
 ]
 
