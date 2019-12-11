@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.b4a8b220058eeb699d75fe926e03fcb7.js"
+  "precache-manifest.57939b27a72332a825855999a7e86945.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "azupokedex"});
